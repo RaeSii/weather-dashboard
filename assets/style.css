@@ -4,3 +4,8 @@
 background-color: blue;
 font-size: 50 px;
 }
+
+button {
+    border-radius: 3em;
+    margin-top: 5px;
+}
