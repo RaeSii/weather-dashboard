@@ -63,7 +63,7 @@ var getForecast = function (lat, lon, cityName) {
         });
 }
 function displayCities(apiresult, cityName) {
-    document.getElementById('returnedCity').textContent = cityName + " : " + new Date().toDateString()
+    document.getElementById('returnedCity').textContent = cityName + "   " + new Date().toDateString()
     document.getElementById('temp').textContent = "Temp : " + apiresult.current.temp
     document.getElementById('humidity').textContent = "Humidity : " + apiresult.current.humidity
     document.getElementById('wind').textContent = "Wind : " + apiresult.current.wind_speed
