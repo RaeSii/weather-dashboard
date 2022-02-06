@@ -19,18 +19,18 @@ var formSubmitHandler = function (event) {
 }
 var getWeather = function (cityName) {
 
-    var apiUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid="+key;
+    var apiUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + key;
     var currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${key}`;
 
     fetch(currentWeather)
         .then(function (response) {
             if (response.ok) {
-   
+
                 response.json().then(function (data) {
                     console.log(data);
                     var lat = data.coord.lat;
                     var lon = data.coord.lon;
-                    getForecast(lat,lon,cityName);
+                    getForecast(lat, lon, cityName);
 
                 });
             } else {
@@ -42,17 +42,17 @@ var getWeather = function (cityName) {
         });
 };
 
-searchFormEl.addEventListener("submit",formSubmitHandler)
+searchFormEl.addEventListener("submit", formSubmitHandler)
 
-var getForecast = function(lat, lon, cityName) {
+var getForecast = function (lat, lon, cityName) {
     var weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutelyhourlyalerts&appid=${key}&units=imperial`
     fetch(weatherUrl)
         .then(function (response) {
             if (response.ok) {
-   
+
                 response.json().then(function (data) {
                     console.log(data);
-                                       displayCities(data,cityName);
+                    displayCities(data, cityName);
                 });
             } else {
                 alert('Error: ' + response.statusText);
@@ -65,11 +65,26 @@ var getForecast = function(lat, lon, cityName) {
 
 //getWeather("Miami");
 
-function displayCities(apiresult,cityName){
+function displayCities(apiresult, cityName) {
     document.getElementById('returnedCity').textContent = cityName
     document.getElementById('temp').textContent = "Temp :" + apiresult.current.wind_speed
     document.getElementById('humidity').textContent = "Humidity :" + apiresult.current.humidity
     document.getElementById('wind').textContent = "Wind : " + apiresult.current.wind_speed
     document.getElementById('uvIndex').textContent = "UVIndex :" + apiresult.current.uvi
-    document.getElementById('icon').setAttribute('src', `http://openweathermap.org/img/wn/${apiresult.current.weather[0].icon}@2x.png`)
+    document.getElementById('icon').setAttribute('src', `https://openweathermap.org/img/wn/${apiresult.current.weather[0].icon}@2x.png`)
+    var daily = apiresult.daily
+    var html = ""
+    for(let i = 1; i < 6; i++){
+        html +=` <div class="card text-white bg-secondary m-1" style="max-width: 10rem;">
+        <div class="card-header">Day: ${i}</div>
+        <div class="card-body">
+          <p class="card-text">Temp: ${daily[i].temp.day}</p>
+          <p class="card-text">Wind: ${daily[i].wind_speed.day}</p>
+          <p class="card-text">Humidity: ${daily[i].humidity.day}</p>
+          <img src="https://openweathermap.org/img/wn/${daily[i].weather[0].icon}@2x.png"/>
+        </div>
+      </div>`
+
+    }
+    document.getElementById('fiveday').innerHTML=html
 }
