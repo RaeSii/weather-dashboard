@@ -77,8 +77,8 @@ function displayCities(apiresult, cityName) {
         <div class="card-body">
         <img src="https://openweathermap.org/img/wn/${daily[i].weather[0].icon}@2x.png"/>
           <p class="card-text">Temp: ${daily[i].temp.day}</p>
-          <p class="card-text">Wind: ${daily[i].wind_speed.day}</p>
-          <p class="card-text">Humidity: ${daily[i].humidity.day}</p>
+          <p class="card-text">Wind: ${daily[i].wind_speed}</p>
+          <p class="card-text">Humidity: ${daily[i].humidity}</p>
         </div>
       </div>`
     }
