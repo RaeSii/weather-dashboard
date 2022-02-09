@@ -28,6 +28,10 @@ var getWeather = function (cityName) {
 
                 response.json().then(function (data) {
                     console.log(data);
+                    var recentSearch = JSON.parse(localStorage.getItem("weatherApi")) || []
+                    recentSearch.push(cityName)
+                    localStorage.setItem("weatherApi",JSON.stringify(recentSearch))
+                    displaySearch();
                     var lat = data.coord.lat;
                     var lon = data.coord.lon;
                     getForecast(lat, lon, cityName);
@@ -83,4 +87,15 @@ function displayCities(apiresult, cityName) {
       </div>`
     }
     document.getElementById('fiveday').innerHTML = html
+
 }
+
+function displaySearch () {
+    var recentSearch = JSON.parse(localStorage.getItem("weatherApi")) || []
+    var html = ""
+    for (let i = 0; i<recentSearch.length;i++) {
+        html += ` <button class="recentCity m-1 btn btn-secondary" id="city-${i}">${recentSearch[i]}</button>`
+    }
+    document.getElementById("location").innerHTML = html
+}
+displaySearch();
