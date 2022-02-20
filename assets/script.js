@@ -1,7 +1,11 @@
 var searchFormEl = document.querySelector('#search-form');
 var cityInputEl = document.querySelector('#city');
 var cityContainerEl = document.querySelector('#city-container');
-var seachHistory = document.querySelector('#search-hisgtory');
+// var seachHistory = document.querySelector('#search-history');
+// var clearHistoryButton = document.getElementById('#clearHistory');
+// var recentCityButton = document.getElementById('#city-');
+
+
 
 var key = "d209e8341b90d4fc42e389a65bce52fd";
 
@@ -76,7 +80,7 @@ function displayCities(apiresult, cityName) {
     var daily = apiresult.daily
     var html = ""
     for (let i = 1; i < 6; i++) {
-        html += ` <div class="card text-white bg-secondary m-1" style="max-width: 10rem;">
+        html += ` <div class="card text-white bg-secondary m-1" style="max-width: 9rem;">
         <div class="card-header">Day: ${i}</div>
         <div class="card-body">
         <img src="https://openweathermap.org/img/wn/${daily[i].weather[0].icon}@2x.png"/>
@@ -94,8 +98,14 @@ function displaySearch () {
     var recentSearch = JSON.parse(localStorage.getItem("weatherApi")) || []
     var html = ""
     for (let i = 0; i<recentSearch.length;i++) {
-        html += ` <button class="recentCity m-1 btn btn-secondary" id="city-${i}">${recentSearch[i]}</button>`
+        html += ` <button data-city="${recentSearch[i]}" onclick = "history(event)" class="recentCity m-1 btn btn-secondary" id="city-${i}">${recentSearch[i]}</button>`
     }
     document.getElementById("location").innerHTML = html
 }
+
 displaySearch();
+
+function clearHistory() {
+    localStorage.clear();
+    window.location.reload();
+};

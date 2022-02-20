@@ -14,3 +14,10 @@ form #search-form.list-group {
     padding-bottom: 2px;
     border-bottom: 2px solid black ;
 }
+
+div#fiveday.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: nowrap;
+}
