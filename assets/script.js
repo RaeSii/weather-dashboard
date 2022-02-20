@@ -1,11 +1,6 @@
 var searchFormEl = document.querySelector('#search-form');
 var cityInputEl = document.querySelector('#city');
 var cityContainerEl = document.querySelector('#city-container');
-// var seachHistory = document.querySelector('#search-history');
-// var clearHistoryButton = document.getElementById('#clearHistory');
-// var recentCityButton = document.getElementById('#city-');
-
-
 
 var key = "d209e8341b90d4fc42e389a65bce52fd";
 
@@ -14,6 +9,7 @@ var formSubmitHandler = function (event) {
 
 
     var cityName = cityInputEl.value;
+    cityInputEl.value = ""
 
     if (cityName) {
         getWeather(cityName);
@@ -98,7 +94,7 @@ function displaySearch () {
     var recentSearch = JSON.parse(localStorage.getItem("weatherApi")) || []
     var html = ""
     for (let i = 0; i<recentSearch.length;i++) {
-        html += ` <button data-city="${recentSearch[i]}" onclick = "history(event)" class="recentCity m-1 btn btn-secondary" id="city-${i}">${recentSearch[i]}</button>`
+        html += ` <button data-city="${recentSearch[i]}" onclick = "history.go(event)" class="recentCity m-1 btn btn-secondary" id="city-${i}">${recentSearch[i]}</button>`
     }
     document.getElementById("location").innerHTML = html
 }
