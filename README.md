@@ -24,4 +24,4 @@ HTML, JavaScript, CSS, JQuery, Bootstrap
 Rachel Schaaf
 
 #### Screenshot
-![Image](./assets/images/img1.png)
+![Image](https://github.com/RaeSii/weather-dashboard/blob/main/assets/images/img1.png)
