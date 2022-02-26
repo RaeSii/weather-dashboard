@@ -2,6 +2,7 @@ var searchFormEl = document.querySelector('#search-form');
 var cityInputEl = document.querySelector('#city');
 var cityContainerEl = document.querySelector('#city-container');
 
+
 var key = "d209e8341b90d4fc42e389a65bce52fd";
 
 var formSubmitHandler = function (event) {
@@ -67,11 +68,22 @@ var getForecast = function (lat, lon, cityName) {
         });
 }
 function displayCities(apiresult, cityName) {
+    var uvIndex = apiresult.current.uvi 
+    if (uvIndex<=2) {
+        document.getElementById('uvIndex').classList.add("bg-success")
+    } else if (uvIndex<=7) {
+        document.getElementById('uvIndex').classList.add("bg-warning")
+       
+    } else if(uvIndex<=8) {
+        document.getElementById('uvIndex').classList.add("bg-danger")
+    }else{
+        document.getElementById('uvIndex').classList.add("bg-info")
+    }
     document.getElementById('returnedCity').textContent = cityName + "   " + new Date().toDateString()
     document.getElementById('temp').textContent = "Temp : " + apiresult.current.temp
     document.getElementById('humidity').textContent = "Humidity : " + apiresult.current.humidity
     document.getElementById('wind').textContent = "Wind : " + apiresult.current.wind_speed
-    document.getElementById('uvIndex').textContent = "UVIndex : " + apiresult.current.uvi
+    document.getElementById('uvIndex').textContent = "UVIndex : " + apiresult.current.uvi 
     document.getElementById('icon').setAttribute('src', `https://openweathermap.org/img/wn/${apiresult.current.weather[0].icon}@2x.png`)
     var daily = apiresult.daily
     var html = ""
@@ -88,13 +100,24 @@ function displayCities(apiresult, cityName) {
     }
     document.getElementById('fiveday').innerHTML = html
 
+    
+
 }
+
+// var uvIndex = document.getElementById.value
+// if (uvIndex<=2) {
+//     $("#uvIndex").addClass("bg-success")
+//     } else if (uvIndex=3>=7) {
+//     $("#uvIndex").addClass("bg-warning")
+//     } else if (uvIndex<=8) {
+//     $("#uvIndex").addClass("bg-danger")
+//     };
 
 function displaySearch () {
     var recentSearch = JSON.parse(localStorage.getItem("weatherApi")) || []
     var html = ""
     for (let i = 0; i<recentSearch.length;i++) {
-        html += ` <button data-city="${recentSearch[i]}" onclick = "history.go(event)" class="recentCity m-1 btn btn-secondary" id="city-${i}">${recentSearch[i]}</button>`
+        html += ` <button data-city="${recentSearch[i]}" onclick = "history(event)" class="recentCity m-1 btn btn-secondary" id="city-${i}">${recentSearch[i]}</button>`
     }
     document.getElementById("location").innerHTML = html
 }
