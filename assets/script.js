@@ -103,16 +103,6 @@ function displayCities(apiresult, cityName) {
     
 
 }
-
-// var uvIndex = document.getElementById.value
-// if (uvIndex<=2) {
-//     $("#uvIndex").addClass("bg-success")
-//     } else if (uvIndex=3>=7) {
-//     $("#uvIndex").addClass("bg-warning")
-//     } else if (uvIndex<=8) {
-//     $("#uvIndex").addClass("bg-danger")
-//     };
-
 function displaySearch () {
     var recentSearch = JSON.parse(localStorage.getItem("weatherApi")) || []
     var html = ""
@@ -128,3 +118,10 @@ function clearHistory() {
     localStorage.clear();
     window.location.reload();
 };
+
+
+function history(event){
+    var city = event.target.textContent
+    console.log(city);
+    getWeather(city)
+}
