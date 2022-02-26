@@ -21,3 +21,9 @@ div#fiveday.row {
     display: flex;
     flex-wrap: nowrap;
 }
+
+span#uvIndex {
+    color: white;
+    font-weight: bold;
+    border-radius: 3px;
+}

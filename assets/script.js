@@ -69,14 +69,13 @@ var getForecast = function (lat, lon, cityName) {
 }
 function displayCities(apiresult, cityName) {
     var uvIndex = apiresult.current.uvi 
-    if (uvIndex<=2) {
+     if (uvIndex < 3) {
         document.getElementById('uvIndex').classList.add("bg-success")
-    } else if (uvIndex<=7) {
-        document.getElementById('uvIndex').classList.add("bg-warning")
-       
-    } else if(uvIndex<=8) {
+    } else if (uvIndex <= 7) {
+        document.getElementById('uvIndex').classList.add("bg-warning")       
+    } else if (uvIndex >= 8) {
         document.getElementById('uvIndex').classList.add("bg-danger")
-    }else{
+    }else {
         document.getElementById('uvIndex').classList.add("bg-info")
     }
     document.getElementById('returnedCity').textContent = cityName + "   " + new Date().toDateString()
